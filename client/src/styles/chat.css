@@ -1,0 +1,26 @@
+.chat-window { display: flex; min-width: 0; flex-direction: column; background: #f7f9fc; }
+.conversation-header { display: flex; align-items: center; gap: 13px; min-height: 87px; padding: 18px 30px; border-bottom: 1px solid #e4e9f1; background: #fff; }
+.conversation-header h2 { margin: 0 0 5px; color: #293754; font: 700 19px 'Syne', sans-serif; }
+.conversation-header p { margin: 0; color: #3bbd83; font-size: 12px; }
+.conversation-header .icon-button { margin-left: auto; }
+.messages-area { overflow: auto; flex: 1; padding: 30px clamp(20px, 8vw, 130px); }
+.message-line { display: flex; justify-content: flex-start; margin: 9px 0; }
+.message-line.mine { justify-content: flex-end; }
+.message-bubble { max-width: min(75%, 500px); border-radius: 5px 16px 16px 16px; padding: 11px 15px 8px; color: #35425c; background: #fff; box-shadow: 0 3px 12px rgba(40,61,97,.05); }
+.message-bubble.mine { border-radius: 16px 5px 16px 16px; color: #fff; background: #2860dc; }
+.message-bubble p { margin: 0; font-size: 14px; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
+.message-bubble time { display: block; margin-top: 5px; color: #a5afbf; font-size: 10px; text-align: right; }
+.message-bubble.mine time { color: #c7d6fc; }
+.composer { display: flex; align-items: center; gap: 10px; margin: 0 28px 23px; border: 1px solid #e1e6ee; border-radius: 13px; padding: 8px 10px; background: #fff; }
+.send-error { margin: 0 28px 8px; color: #c33d4f; font-size: 12px; text-align: right; }
+.composer input { flex: 1; min-width: 0; border: 0; outline: 0; padding: 9px 2px; color: #293754; background: transparent; }
+.icon-button, .send-button { display: grid; place-items: center; width: 34px; height: 34px; border: 0; border-radius: 9px; color: #7e8ba1; background: transparent; font-size: 19px; }
+.icon-button:hover { color: #2860dc; background: #edf2ff; }
+.send-button { color: #fff; background: #2860dc; }
+.send-button:disabled { opacity: .4; }
+.chat-empty { display: grid; place-items: center; align-content: center; min-height: 100%; color: #8490a5; text-align: center; }
+.empty-symbol { display: grid; place-items: center; width: 72px; height: 72px; margin-bottom: 18px; border-radius: 24px; color: #2860dc; background: #e8efff; font-size: 38px; }
+.chat-empty h2 { margin: 0 0 8px; color: #35425c; font: 700 20px 'Syne', sans-serif; }
+.chat-empty p { margin: 0; font-size: 13px; }
+.center-note { margin: 45px 0; color: #a0aabe; text-align: center; font-size: 13px; }
+@media (max-width: 650px) { .messages-area { padding: 24px 16px; } .conversation-header { padding: 15px 16px; } .composer { margin: 0 12px 14px; } }
