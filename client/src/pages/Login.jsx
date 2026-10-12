@@ -18,6 +18,7 @@ export default function Login() {
 		setLoading(true);
 		try {
 			await login(form);
+			setForm({ phone: '', password: '' });
 			navigate('/');
 		} catch (requestError) {
 			setError(requestError.response?.data?.message || 'Không thể đăng nhập lúc này');

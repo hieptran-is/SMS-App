@@ -19,6 +19,7 @@ export default function Register() {
 		setLoading(true);
 		try {
 			await registerRequest({ name: form.name, phone: form.phone, password: form.password });
+			setForm({ name: '', phone: '', password: '', confirmPassword: '' });
 			navigate('/login', { state: { message: 'Đăng ký thành công. Hãy đăng nhập để tiếp tục.' } });
 		} catch (requestError) {
 			setError(requestError.response?.data?.message || 'Không thể tạo tài khoản lúc này');
@@ -40,11 +41,11 @@ export default function Register() {
 					<p className="eyebrow">BẮT ĐẦU KẾT NỐI</p>
 					<h2>Tạo tài khoản</h2>
 					<p className="muted">Thông tin của bạn được lưu an toàn trên hệ thống.</p>
-					<form onSubmit={submit} className="auth-form">
-						<label>Họ và tên<input value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} placeholder="Nguyễn Văn A" /></label>
-						<label>Số điện thoại<input value={form.phone} onChange={(event) => setForm({ ...form, phone: event.target.value })} placeholder="090 123 4567" inputMode="tel" /></label>
-						<label>Mật khẩu<input type="password" value={form.password} onChange={(event) => setForm({ ...form, password: event.target.value })} placeholder="Tối thiểu 6 ký tự" /></label>
-						<label>Nhập lại mật khẩu<input type="password" value={form.confirmPassword} onChange={(event) => setForm({ ...form, confirmPassword: event.target.value })} placeholder="Nhập lại mật khẩu" /></label>
+					<form onSubmit={submit} className="auth-form" autoComplete="off">
+						<label>Họ và tên<input name="registration-name" autoComplete="off" value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} placeholder="Nguyễn Văn A" /></label>
+						<label>Số điện thoại<input name="registration-phone" autoComplete="off" value={form.phone} onChange={(event) => setForm({ ...form, phone: event.target.value })} placeholder="090 123 4567" inputMode="tel" /></label>
+						<label>Mật khẩu<input name="new-password" type="password" autoComplete="new-password" value={form.password} onChange={(event) => setForm({ ...form, password: event.target.value })} placeholder="Tối thiểu 6 ký tự" /></label>
+						<label>Nhập lại mật khẩu<input name="confirm-new-password" type="password" autoComplete="new-password" value={form.confirmPassword} onChange={(event) => setForm({ ...form, confirmPassword: event.target.value })} placeholder="Nhập lại mật khẩu" /></label>
 						{error && <p className="form-error">{error}</p>}
 						<button className="primary-button" disabled={loading}>{loading ? 'Đang tạo tài khoản...' : 'Đăng ký'}</button>
 					</form>

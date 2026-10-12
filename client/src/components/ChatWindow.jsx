@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import MessageBubble from './MessageBubble';
 
-export default function ChatWindow({ user, messages, loading, onSend }) {
+export default function ChatWindow({ user, currentUserId, messages, loading, error, onSend }) {
 	const [text, setText] = useState('');
 	const [sendError, setSendError] = useState('');
 	const endRef = useRef(null);
 
-	useEffect(() => endRef.current?.scrollIntoView({ behavior: 'smooth' }), [messages]);
+	useEffect(() => {
+		endRef.current?.scrollIntoView({ behavior: 'smooth' });
+	}, [messages]);
 
 	const submit = async (event) => {
 		event.preventDefault();
@@ -27,7 +29,7 @@ export default function ChatWindow({ user, messages, loading, onSend }) {
 	return <section className="chat-window">
 		<header className="conversation-header"><span className="avatar">{user.name.charAt(0)}</span><div><h2>{user.name}</h2><p>{user.isOnline ? 'Đang hoạt động' : 'Ngoại tuyến'}</p></div><button className="icon-button" title="Thông tin">ⓘ</button></header>
 		<div className="messages-area">
-			{loading ? <p className="center-note">Đang tải tin nhắn...</p> : messages.length === 0 ? <p className="center-note">Hãy gửi lời chào đầu tiên.</p> : messages.map((message) => <MessageBubble key={message._id} message={message} isMine={message.sender?._id !== user._id} />)}
+			{loading ? <p className="center-note">Đang tải tin nhắn...</p> : error ? <p className="send-error" role="alert">{error}</p> : messages.length === 0 ? <p className="center-note">Hãy gửi lời chào đầu tiên.</p> : messages.map((message) => <MessageBubble key={message._id} message={message} isMine={message.sender?._id === currentUserId} />)}
 			<div ref={endRef} />
 		</div>
 		{sendError && <p className="send-error" role="alert">{sendError}</p>}
